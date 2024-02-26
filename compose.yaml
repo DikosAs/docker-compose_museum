@@ -20,6 +20,7 @@ services:
     container_name: react-front
     restart: always
     command: npm run dev -- --host 0.0.0.0 --port 80
+    env_file: .env
     depends_on:
       - django
 
@@ -27,14 +28,10 @@ services:
     build: backend
     container_name: django-back
     restart: always
+    volumes:
+      - ./backend/museum-backend/media:/var/www/app.backend/media
     command: python manage.py runserver 0.0.0.0:80
-    environment:
-      DJANGO_DB_ENGINE: django.db.backends.mysql
-      DB_NAME: site
-      DB_USER_NAME: root
-      DB_USER_PASSWORD: 4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2
-      DB_HOST: db
-      DB_PORT: 3306
+    env_file: .env
     depends_on:
       - db
 
@@ -43,9 +40,10 @@ services:
     container_name: mysql-db
     restart: always
     command: --default-authentication-plugin=mysql_native_password
+    env_file: .env
     environment:
-      MYSQL_ROOT_PASSWORD: 4813494d137e1631bba301d5acab6e7bb7aa74ce1185d456565ef51d737677b2
-      MYSQL_DATABASE: site
+      MYSQL_ROOT_PASSWORD: ${DB_USER_PASSWORD}
+      MYSQL_DATABASE: ${DB_NAME}
     ports:
       - "3306:3306"
     volumes:

@@ -2,7 +2,7 @@ import alt_img from "../not-found-image.png"
 import "./item.css"
 
 export default function Item({ name, description, img_url }) {
-  if (img_url == undefined) {
+  if (img_url === undefined) {
     img_url = alt_img
   }
 
