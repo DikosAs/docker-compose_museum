@@ -12,6 +12,9 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+load_dotenv()
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -30,7 +33,7 @@ DEBUG = 1
 ALLOWED_HOSTS = ['*']
 
 # У каких protocols + hostname может быть CSRF token
-CSRF_TRUSTED_ORIGINS = ['https://Dimasik911.pythonanywhere.com']
+CSRF_TRUSTED_ORIGINS = ['https://zavschoolmuseum.pythonanywhere.com']
 
 # CORS политика
 CORS_ALLOW_ALL_ORIGINS = True
@@ -67,7 +70,7 @@ ROOT_URLCONF = 'server.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates'],
+        'DIRS': [],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
